@@ -1,0 +1,473 @@
+/* ============================================= */
+/* СОВРЕМЕННЫЙ ШВЕЙЦАРСКИЙ СТИЛЬ ДЛЯ CV ДИЗАЙНЕРА */
+/* Базовые принципы: четкая сетка, типографика, минимум декора */
+/* ============================================= */
+
+/* ---------- Переменные и базовые настройки ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+:root {
+    /* Акцентный цвет — чистый синий (#0066FF) */
+    --color-accent: #0066FF;
+    /* Монохромная палитра */
+    --color-black: #111111;
+    --color-dark-gray: #333333;
+    --color-medium-gray: #777777;
+    --color-light-gray: #EEEEEE;
+    --color-white: #FFFFFF;
+    --color-border: #DDDDDD;
+
+    /* Типографика */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --line-height-normal: 1.5;
+    --letter-spacing-tight: -0.02em;
+}
+
+/* Сброс отступов */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: var(--line-height-normal);
+    color: var(--color-black);
+    background-color: var(--color-white);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Контейнер-сетка: теперь шире, чтобы было место для воздуха */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px; /* Увеличенные отступы по бокам */
+}
+
+/* ---------- ШАПКА (СИЛЬНАЯ ТИПОГРАФИКА) ---------- */
+.header {
+    padding: 80px 0 40px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header__content {
+    display: grid;
+    grid-template-columns: 180px 1fr; /* Фиксированная ширина для фото */
+    gap: 60px;
+    align-items: stretch; 
+}
+
+.header__photo-img {
+    width: 180px;           /* Фиксированная ширина */
+    height: 180px;          /* Фиксированная высота — фото всегда квадратное */
+    object-fit: cover;      /* Обрезаем, но сохраняем пропорции */
+    object-position: center 20%; /* Смещаем фокус чуть выше (чтобы лицо не обрезалось) */
+    display: block;
+    filter: grayscale(100%);
+    border: none;           /* Убираем обводку, если была */
+}
+
+.header__info {
+    padding-top: 8px;
+}
+
+.header__title {
+    font-size: 6rem; /* 64px — очень крупно, как в референсах */
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: 1.1;
+    color: var(--color-black);
+    margin-bottom: 16px;
+}
+
+.header__subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-medium-gray);
+    margin-bottom: 24px;
+}
+
+.header__education {
+    font-size: 1rem;
+    color: var(--color-dark-gray);
+    margin-bottom: 32px;
+    max-width: 500px;
+}
+
+/* ---------- КОНТАКТЫ В ШАПКЕ ---------- */
+.header__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 32px;
+}
+
+/* Общие стили для всех контактов */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-dark-gray);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.contact-item:hover {
+    color: var(--color-accent);
+}
+
+/* Стили для SVG иконок */
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    filter: none;  /* Убираем возможные фильтры */
+    transition: filter 0.2s ease;
+}
+
+.contact-item:hover .contact-icon {
+    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
+    /* Этот фильтр делает иконку синей (#0066FF) при наведении */
+}
+
+/* Если хочешь, чтобы иконки были серыми, а при наведении цветными */
+.contact-icon {
+    opacity: 0.7;
+}
+
+.contact-item:hover .contact-icon {
+    opacity: 1;
+    filter: none; /* или нужный цвет */
+}
+
+/* ---------- ДВУХКОЛОНОЧНАЯ СЕТКА ДЛЯ ОСНОВНОГО КОНТЕНТА ---------- */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px; /* Основной контент и боковая панель */
+    gap: 80px; /* Большой воздух между колонками */
+    padding: 60px 0;
+}
+
+/* ---------- ЗАГОЛОВКИ СЕКЦИЙ (АКЦЕНТНЫЙ ЦВЕТ) ---------- */
+.section {
+    margin-bottom: 60px;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section__title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent); /* Синий цвет */
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 8px;
+    display: inline-block; /* Чтобы линия была только под текстом */
+}
+
+/* ---------- ОПЫТ РАБОТЫ (ЛЕВАЯ КОЛОНКА) ---------- */
+.job {
+    margin-bottom: 48px;
+}
+
+.job:last-child {
+    margin-bottom: 0;
+}
+
+.job__header {
+    margin-bottom: 12px;
+}
+
+.job__company {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 4px;
+}
+
+.job__meta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.job__period {
+    color: var(--color-accent); /* Синий для периода */
+}
+
+.job__achievements {
+    list-style: none;
+    margin-top: 16px;
+}
+
+.job__achievements li {
+    margin-bottom: 12px;
+    padding-left: 0; /* Убираем отступ */
+    color: var(--color-dark-gray);
+    font-size: 1rem;
+    line-height: 1.6;
+    border-left: 2px solid var(--color-light-gray); /* Тонкая серая линия слева */
+    padding-left: 16px;
+}
+
+.job__achievements li::before {
+    content: ''; /* Убираем стандартный маркер */
+}
+
+.job__achievements a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.job__achievements a:hover {
+    border-bottom-color: var(--color-accent);
+}
+
+/* ---------- САЙДБАР (ПРАВАЯ КОЛОНКА) ---------- */
+.sidebar {
+    border-left: 1px solid var(--color-border);
+    padding-left: 48px;
+}
+
+/* ---------- НАВЫКИ В САЙДБАРЕ ---------- */
+.skills__category {
+    margin-bottom: 40px;
+}
+
+.skills__category-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-medium-gray);
+    margin-bottom: 20px;
+}
+
+/* Стили для тегов навыков */
+.skills__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0; /* Прямые углы — швейцарский стиль */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.skill-tag:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+/* Стили для списка навыков (как альтернатива тегам) */
+.skills__list {
+    list-style: none;
+}
+
+.skills__list li {
+    margin-bottom: 12px;
+    color: var(--color-dark-gray);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px dotted var(--color-border);
+    padding-bottom: 8px;
+}
+
+.skills__list li::before {
+    content: '▹';
+    color: var(--color-accent);
+    font-size: 1rem;
+}
+
+/* Примечания к навыкам */
+.skills__note {
+    margin-top: 16px;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    font-style: normal;
+    border-top: 1px solid var(--color-border);
+    padding-top: 16px;
+}
+
+/* ---------- КОНТАКТЫ В САЙДБАРЕ ---------- */
+.sidebar-contacts {
+    margin-top: 24px;
+}
+
+.sidebar-contacts .contact-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-contacts .contact-item:last-child {
+    border-bottom: none;
+}
+
+.sidebar-contacts .contact-item:hover {
+    border-bottom-color: var(--color-accent);
+    color: var(--color-black);
+}
+
+/* ---------- ПОДВАЛ ---------- */
+.footer {
+    border-top: 1px solid var(--color-border);
+    padding: 32px 0;
+    text-align: center;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+}
+
+/* ---------- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ---------- */
+@media (max-width: 900px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    .header__content {
+        grid-template-columns: 1fr; /* Фото сверху */
+        gap: 32px;
+    }
+
+    .header__photo-img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .header__title {
+        font-size: 3rem;
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 40px;
+    }
+
+    .sidebar {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid var(--color-border);
+        padding-top: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header__title {
+        font-size: 2.4rem;
+    }
+
+    .header__subtitle {
+        font-size: 1.2rem;
+    }
+
+    .header__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 32px;
+    }
+
+    .job__meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+/* ==================== */
+/* ФОТО НА ВСЮ ВЫСОТУ */
+/* ==================== */
+.header__photo-wrapper {
+    display: flex;
+    align-items: flex-start;      /* Прижимаем к верху */
+    height: 100%;                 /* Тянемся на всю высоту колонки */
+    width: 100%;                  /* Занимаем всю ширину колонки */
+}
+
+.header__photo-img {
+    width: 100%;                  /* Ширина = ширина родителя */
+    height: auto;                 /* Высота подстроится */
+    aspect-ratio: 1 / 1;          /* Квадрат */
+    object-fit: cover;            /* Но тогда фото обрежется */
+    object-position: center top;
+}
+
+/* Чтобы фото-обертка тянулась на всю высоту колонки */
+.header__content {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 60px;
+    align-items: stretch;      /* Важно! Растягиваем ячейки по высоте */
+}
+
+/* ==================== */
+/* ОБРАЗОВАНИЕ В САЙДБАРЕ */
+/* ==================== */
+
+.education__item {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 16px;
+}
+
+.education__item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.education__degree {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.education__meta {
+    font-size: 0.85rem;
+    color: var(--color-medium-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Специально для заголовка секции с опытом — синий, большой, жирный */
+.experience .section__title {
+    font-size: 2.5rem;           /* Большой размер */
+    font-weight: 700;            /* Жирный */
+    color: var(--color-accent);  /* Синий цвет #0066FF */
+    border-bottom: none;         /* Убираем подчеркивание */
+    text-transform: none;        /* Отменяем капс */
+    letter-spacing: normal;      /* Обычный интервал */
+}
+
+.experience .section__title::after {
+    display: none;               /* Убираем синюю полоску */
+}
+
+.header, .main-grid, .footer {
+    background-color: rgba(255, 255, 255, 0.8); /* 0.8 = 80% непрозрачности */
+    /* или 0.7, 0.9 и т.д. */
+}
