@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анастасия Мартынцева — дизайнер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.11.0/lottie.min.js"></script>
 </head>
@@ -18,7 +19,10 @@
                 
                 <!-- Информация о себе -->
                 <div class="header__info">
-                    <h1 class="header__title">Мартынцева Анастасия</h1>
+                    <h1 class="header__title">
+                        <span class="typing-line" data-text="Мартынцева">Мартынцева</span>
+                        <span class="typing-line" data-text="Анастасия">Анастасия</span>
+                    </h1>
                     <p class="header__subtitle">23 года • Екатеринбург</p>
                     
                     <!-- Контакты в шапке (оставляем здесь) -->
@@ -33,7 +37,7 @@
                         </a>
                         <a href="mailto:martynceva.nastya@gmail.com" class="contact-item">
                             <img src="icons/mail.svg" alt="Email" class="contact-icon">
-                            martynceva.nastya
+                            martynceva.nastya@gmail.com
                         </a>
                     </div>
                 </div>
@@ -58,13 +62,13 @@
 
                 <!-- Опыт работы -->
                 <section class="experience section">
-                    <h2 class="section__title">Опыт работы — 3 года 2 месяца</h2>
+                    <h2 class="section__title">Опыт работы — 2 года 8 месяцев</h2>
                     
                     <!-- Jet Style -->
                     <div class="job">
                         <div class="job__header">
                             <div class="job__company">Jet Style</div>
-                            <div class="job__period">Коммуникационный дизайнер</div>
+                            <div class="job__period">Август 2024 - Март 2025</div>
                         </div>
                         <ul class="job__achievements">
                             <li>Создавала визуалы для постов в соцсети с помощью Figma, After Effects, Blender, Midjourney и др.</li>
@@ -81,7 +85,7 @@
                     <div class="job">
                         <div class="job__header">
                             <div class="job__company">Автор IT</div>
-                            <div class="job__period">Март 2022 — Февраль 2024</div>
+                            <div class="job__period">Июнь 2023 — Февраль 2024</div>
                         </div>
                         <ul class="job__achievements">
                             <li>Спроектировала сайт для привлечения клиентов</li>
@@ -96,7 +100,7 @@
                     <div class="job">
                         <div class="job__header">
                             <div class="job__company">Фриланс</div>
-                            <div class="job__period">Универсальный дизайнер</div>
+                            <div class="job__period">Октябрь 2024 - по настоящее время</div>
                         </div>
                         <ul class="job__achievements">
                             <li>Разработала логотип с отсылкой к китайскому производителю</li>
@@ -170,7 +174,7 @@
                         </a>
                         <a href="mailto:martynceva.nastya@gmail.com" class="contact-item">
                             <img src="icons/mail.svg" alt="Email" class="contact-icon">
-                            martynceva.nastya
+                            martynceva.nastya@gmail.com
                         </a>
                     </div>
                 </section>
@@ -221,5 +225,86 @@
         background-color: transparent !important;
     }
 </style>
+<script>
+    function resizePhoto() {
+        const photoWrapper = document.querySelector('.header__photo-wrapper');
+        const headerInfo = document.querySelector('.header__info');
+        const headerContent = document.querySelector('.header__content');
+        
+        if (!photoWrapper || !headerInfo || !headerContent) return;
+        
+        // Высота левой колонки = высота блока с именем и контактами
+        const headerHeight = headerInfo.offsetHeight;
+        
+        // Делаем wrapper квадратным по высоте, но не больше 300px
+        const newSize = Math.min(headerHeight, 300);
+        photoWrapper.style.width = newSize + 'px';
+        photoWrapper.style.height = newSize + 'px';
+        
+        // Убеждаемся, что grid настроен правильно
+        headerContent.style.gridTemplateColumns = newSize + 'px 1fr';
+        headerContent.style.gap = '40px';  // Отступ между фото и текстом
+    }
+
+    // Запускаем после загрузки и при изменении окна
+    window.addEventListener('load', resizePhoto);
+    window.addEventListener('resize', resizePhoto);
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const lines = document.querySelectorAll('.typing-line');
+        const firstLine = lines[0];
+        const lastLine = lines[1];
+        
+        // Функция для получения точной ширины текста
+        function getTextWidth(element) {
+            const span = document.createElement('span');
+            span.style.font = window.getComputedStyle(element).font;
+            span.style.visibility = 'hidden';
+            span.style.position = 'absolute';
+            span.style.whiteSpace = 'nowrap';
+            span.style.fontSize = '6rem'; // Явно указываем размер
+            span.style.fontWeight = '700';
+            span.textContent = element.textContent;
+            document.body.appendChild(span);
+            const width = span.offsetWidth;
+            document.body.removeChild(span);
+            return width + 'px'; // Возвращаем с единицами измерения
+        }
+        
+        // Получаем реальную ширину для каждой строки
+        const firstLineWidth = getTextWidth(firstLine);
+        const lastLineWidth = getTextWidth(lastLine);
+        
+        // Устанавливаем CSS-переменные для анимации
+        firstLine.style.setProperty('--target-width', firstLineWidth);
+        firstLine.style.setProperty('--duration', '1.5s');
+        firstLine.style.setProperty('--steps', firstLine.textContent.length);
+        
+        lastLine.style.setProperty('--target-width', lastLineWidth);
+        lastLine.style.setProperty('--duration', '1.5s');
+        lastLine.style.setProperty('--steps', lastLine.textContent.length);
+        
+        // Запускаем анимацию первой строки
+        firstLine.classList.add('animating');
+        
+        // Тайминг для второй строки
+        setTimeout(() => {
+            // Убираем курсор у первой строки
+            firstLine.classList.remove('animating');
+            firstLine.style.borderRightColor = 'transparent';
+            
+            // Запускаем анимацию второй строки
+            lastLine.classList.add('animating');
+        }, 1500);
+        
+        // Финальный этап
+        setTimeout(() => {
+            lastLine.classList.remove('animating');
+            lastLine.classList.add('cursor-blink');
+            lastLine.style.borderRightColor = 'var(--color-accent)';
+        }, 3000);
+    });
+</script>
 </body>
 </html>

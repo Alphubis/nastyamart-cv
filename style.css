@@ -2,12 +2,13 @@
 /* СОВРЕМЕННЫЙ ШВЕЙЦАРСКИЙ СТИЛЬ ДЛЯ CV ДИЗАЙНЕРА */
 /* Базовые принципы: четкая сетка, типографика, минимум декора */
 /* ============================================= */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 /* ---------- Переменные и базовые настройки ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 :root {
+    --font-main: 'Roboto', sans-serif;
+    --font-heading: 'Roboto', sans-serif; 
     /* Акцентный цвет — чистый синий (#0066FF) */
-    --color-accent: #0066FF;
+    --color-accent: #FF3F42;
     /* Монохромная палитра */
     --color-black: #111111;
     --color-dark-gray: #333333;
@@ -17,7 +18,6 @@
     --color-border: #DDDDDD;
 
     /* Типографика */
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --line-height-normal: 1.5;
     --letter-spacing-tight: -0.02em;
 }
@@ -29,11 +29,24 @@
     box-sizing: border-box;
 }
 
+* {
+    font-family: var(--font-main) !important;
+}
+
+body, button, input, textarea {
+    font-family: var(--font-main);
+}
+
+/* Для заголовков тоже Roboto (можно другой шрифт, если хочешь) */
+h1, h2, h3, h4, h5, h6, .header__title, .section__title, .job__company {
+    font-family: var(--font-heading);
+}
+
 body {
     font-family: var(--font-family);
     line-height: var(--line-height-normal);
     color: var(--color-black);
-    background-color: var(--color-white);
+    background-color: transparent !important;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
 }
@@ -42,13 +55,13 @@ body {
 .container {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 48px; /* Увеличенные отступы по бокам */
+    padding: 0; /* Увеличенные отступы по бокам */
+    background-color: transparent !important;
 }
 
 /* ---------- ШАПКА (СИЛЬНАЯ ТИПОГРАФИКА) ---------- */
 .header {
     padding: 80px 0 40px 0;
-    border-bottom: 1px solid var(--color-border);
 }
 
 .header__content {
@@ -64,21 +77,50 @@ body {
     object-fit: cover;      /* Обрезаем, но сохраняем пропорции */
     object-position: center 20%; /* Смещаем фокус чуть выше (чтобы лицо не обрезалось) */
     display: block;
-    filter: grayscale(100%);
     border: none;           /* Убираем обводку, если была */
 }
 
-.header__info {
-    padding-top: 8px;
-}
 
 .header__title {
-    font-size: 6rem; /* 64px — очень крупно, как в референсах */
+    font-size: 6rem;
     font-weight: 700;
-    letter-spacing: var(--letter-spacing-tight);
-    line-height: 1.1;
+    line-height: 1.2;
     color: var(--color-black);
     margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;  /* Строки друг под другом */
+}
+
+.typing-line {
+    display: inline-block;
+    white-space: nowrap;      /* Чтобы строка не переносилась внутри себя */
+    overflow: hidden;
+    width: 0;
+    border-right: 3px solid var(--color-accent);
+    animation: typing 1.5s steps(30, end) forwards;
+}
+
+.typing-line:first-child {
+    animation: typing 1.5s steps(30, end) forwards;
+}
+
+.typing-line:last-child {
+    animation: typing 1.5s steps(30, end) 1.5s forwards; /* Стартует через 1.5с */
+    border-right: 3px solid var(--color-accent);
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* Мигающий курсор только у последней строки */
+.typing-line:last-child {
+    animation: typing 1.5s steps(30, end) 1.5s forwards, blink 0.75s step-end infinite;
 }
 
 .header__subtitle {
@@ -88,19 +130,11 @@ body {
     margin-bottom: 24px;
 }
 
-.header__education {
-    font-size: 1rem;
-    color: var(--color-dark-gray);
-    margin-bottom: 32px;
-    max-width: 500px;
-}
-
 /* ---------- КОНТАКТЫ В ШАПКЕ ---------- */
 .header__contacts {
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
-    border-top: 1px solid var(--color-border);
     padding-top: 32px;
 }
 
@@ -127,10 +161,6 @@ body {
     transition: filter 0.2s ease;
 }
 
-.contact-item:hover .contact-icon {
-    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
-    /* Этот фильтр делает иконку синей (#0066FF) при наведении */
-}
 
 /* Если хочешь, чтобы иконки были серыми, а при наведении цветными */
 .contact-icon {
@@ -139,7 +169,7 @@ body {
 
 .contact-item:hover .contact-icon {
     opacity: 1;
-    filter: none; /* или нужный цвет */
+    filter: var(--color-border); /* или нужный цвет */
 }
 
 /* ---------- ДВУХКОЛОНОЧНАЯ СЕТКА ДЛЯ ОСНОВНОГО КОНТЕНТА ---------- */
@@ -165,8 +195,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--color-accent); /* Синий цвет */
-    margin-bottom: 24px;
-    border-bottom: 2px solid var(--color-accent);
+    border-bottom: none;
     padding-bottom: 8px;
     display: inline-block; /* Чтобы линия была только под текстом */
 }
@@ -218,7 +247,7 @@ body {
     color: var(--color-dark-gray);
     font-size: 1rem;
     line-height: 1.6;
-    border-left: 2px solid var(--color-light-gray); /* Тонкая серая линия слева */
+    border-left: 2px solid #FFC999; /* Тонкая серая линия слева */
     padding-left: 16px;
 }
 
@@ -238,7 +267,6 @@ body {
 
 /* ---------- САЙДБАР (ПРАВАЯ КОЛОНКА) ---------- */
 .sidebar {
-    border-left: 1px solid var(--color-border);
     padding-left: 48px;
 }
 
@@ -263,21 +291,40 @@ body {
     gap: 8px;
 }
 
-.skill-tag {
-    background-color: var(--color-light-gray);
-    color: var(--color-dark-gray);
-    padding: 6px 14px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 0; /* Прямые углы — швейцарский стиль */
-    transition: background-color 0.2s, color 0.2s;
+.skills__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
 }
 
-.skill-tag:hover {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+.skill-tag {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;  /* Белый текст */
+    border: none;  /* Убираем обводку */
+    border-radius: 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;  /* Плавное движение */
+    cursor: default;  /* Обычный курсор */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Эффект при наведении — только подъём и тень */
+.skill-tag:hover {
+    transform: translateY(-3px);  /* Поднимаем вверх */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Цвет НЕ меняется */
+}
+
+/* Распределяем цвета по навыкам (можно добавить больше) */
+.skill-tag:nth-child(6n+1) { background-color: #FFE175; }  /* Жёлтый */
+.skill-tag:nth-child(6n+2) { background-color: #FFAA5E; }  /* Оранжевый */
+.skill-tag:nth-child(6n+3) { background-color: #8AC6D0; }  /* Голубой */
+.skill-tag:nth-child(6n+4) { background-color: #FFA5B0; }  /* Розовый */
+.skill-tag:nth-child(6n+5) { background-color: #FFE175; }  /* Повтор жёлтого */
+.skill-tag:nth-child(6n+6) { background-color: #FFAA5E; }  /* Повтор оранжевого */
 
 /* Стили для списка навыков (как альтернатива тегам) */
 .skills__list {
@@ -313,12 +360,11 @@ body {
 
 /* ---------- КОНТАКТЫ В САЙДБАРЕ ---------- */
 .sidebar-contacts {
-    margin-top: 24px;
+    margin-top: none;
 }
 
 .sidebar-contacts .contact-item {
     padding: 12px 0;
-    border-bottom: 1px solid var(--color-border);
 }
 
 .sidebar-contacts .contact-item:last-child {
@@ -327,7 +373,6 @@ body {
 
 .sidebar-contacts .contact-item:hover {
     border-bottom-color: var(--color-accent);
-    color: var(--color-black);
 }
 
 /* ---------- ПОДВАЛ ---------- */
@@ -348,11 +393,6 @@ body {
     .header__content {
         grid-template-columns: 1fr; /* Фото сверху */
         gap: 32px;
-    }
-
-    .header__photo-img {
-        width: 140px;
-        height: 140px;
     }
 
     .header__title {
@@ -385,7 +425,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
-    border-top: 1px solid var(--color-border);
     padding-top: 32px;
     }
 
@@ -404,6 +443,10 @@ body {
     align-items: flex-start;      /* Прижимаем к верху */
     height: 100%;                 /* Тянемся на всю высоту колонки */
     width: 100%;                  /* Занимаем всю ширину колонки */
+    margin-right: 30px;  /* Отступ после фото */
+    margin-left: 0;        /* Убираем отступ слева */
+    padding-left: 0;       /* Убираем внутренний отступ */
+    justify-self: start;   /* Прижимаем к началу грид-ячейки */
 }
 
 .header__photo-img {
@@ -428,7 +471,6 @@ body {
 
 .education__item {
     margin-bottom: 24px;
-    border-bottom: 1px solid var(--color-border);
     padding-bottom: 16px;
 }
 
@@ -468,6 +510,72 @@ body {
 }
 
 .header, .main-grid, .footer {
-    background-color: rgba(255, 255, 255, 0.8); /* 0.8 = 80% непрозрачности */
-    /* или 0.7, 0.9 и т.д. */
+    background-color: rgba(255, 255, 255, 0.7) !important; /* 70% белый */
+    backdrop-filter: blur(3px); /* Лёгкое размытие фона */
+    border-radius: 0; /* Убираем скругления, если были */
+}
+
+/* ==================== */
+/* АДАПТИВНАЯ АНИМАЦИЯ */
+/* ==================== */
+
+#touchdesigner-effect {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    overflow: hidden !important; /* Прячем всё, что вылезает за края */
+}
+
+/* Растягиваем саму анимацию */
+#touchdesigner-effect svg,
+#touchdesigner-effect canvas {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    transform: translate(-50%, -50%) scale(1.1) !important; /* Немного увеличиваем для гарантии */
+    object-fit: cover !important;
+}
+
+/* Делаем контент поверх анимации */
+.header, .main-grid, .footer {
+    position: relative;
+    z-index: 2;
+    background-color: transparent !important
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.job__achievements li {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.5s ease forwards;
+}
+
+.job__achievements li:nth-child(1) { animation-delay: 0.1s; }
+.job__achievements li:nth-child(2) { animation-delay: 0.2s; }
+.job__achievements li:nth-child(3) { animation-delay: 0.3s; }
+/* и так далее */
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
