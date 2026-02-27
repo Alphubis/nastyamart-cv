@@ -6,8 +6,7 @@
 /* ---------- Переменные и базовые настройки ---------- */
 :root {
     --font-main: 'Roboto', sans-serif;
-    --font-heading: 'Roboto', sans-serif; 
-    /* Акцентный цвет — чистый синий (#0066FF) */
+    --font-heading: 'Roboto', sans-serif;
     --color-accent: #FF3F42;
     /* Монохромная палитра */
     --color-black: #111111;
@@ -118,11 +117,6 @@ body {
     50% { border-color: transparent; }
 }
 
-/* Мигающий курсор только у последней строки */
-.typing-line:last-child {
-    animation: typing 1.5s steps(30, end) 1.5s forwards, blink 0.75s step-end infinite;
-}
-
 .header__subtitle {
     font-size: 1rem;
     font-weight: 400;
@@ -169,7 +163,8 @@ body {
 
 .contact-item:hover .contact-icon {
     opacity: 1;
-    filter: var(--color-border); /* или нужный цвет */
+    filter: brightness(0) saturate(100%) invert(27%) sepia(94%) saturate(3749%) hue-rotate(347deg) brightness(104%) contrast(101%);
+    /* Этот фильтр превращает чёрный цвет в #FF3F42 */
 }
 
 /* ---------- ДВУХКОЛОНОЧНАЯ СЕТКА ДЛЯ ОСНОВНОГО КОНТЕНТА ---------- */
@@ -285,12 +280,6 @@ body {
 }
 
 /* Стили для тегов навыков */
-.skills__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
 .skills__tags {
     display: flex;
     flex-wrap: wrap;
@@ -421,13 +410,6 @@ body {
         font-size: 1.2rem;
     }
 
-    .header__contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    padding-top: 32px;
-    }
-
     .job__meta {
         flex-direction: column;
         align-items: flex-start;
@@ -509,12 +491,6 @@ body {
     display: none;               /* Убираем синюю полоску */
 }
 
-.header, .main-grid, .footer {
-    background-color: rgba(255, 255, 255, 0.7) !important; /* 70% белый */
-    backdrop-filter: blur(3px); /* Лёгкое размытие фона */
-    border-radius: 0; /* Убираем скругления, если были */
-}
-
 /* ==================== */
 /* АДАПТИВНАЯ АНИМАЦИЯ */
 /* ==================== */
@@ -577,5 +553,99 @@ body {
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+/* ==================== */
+/* ПОРТФОЛИО-ГАЛЕРЕЯ */
+/* ==================== */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.portfolio-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Квадратные ячейки */
+}
+
+.portfolio-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.portfolio-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    transform: scale(1.1); /* Увеличение при наведении */
+}
+
+.portfolio-item:hover .portfolio-image-wrapper {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Чтобы не мешало клику */
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-social {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 }
