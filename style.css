@@ -7,7 +7,7 @@
 :root {
     --font-main: 'Roboto', sans-serif;
     --font-heading: 'Roboto', sans-serif;
-    --color-accent: #FF3F42;
+    --color-accent: #0066FF;
     /* Монохромная палитра */
     --color-black: #111111;
     --color-dark-gray: #333333;
@@ -117,13 +117,6 @@ body {
     50% { border-color: transparent; }
 }
 
-.header__subtitle {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--color-medium-gray);
-    margin-bottom: 24px;
-}
-
 /* ---------- КОНТАКТЫ В ШАПКЕ ---------- */
 .header__contacts {
     display: flex;
@@ -163,8 +156,8 @@ body {
 
 .contact-item:hover .contact-icon {
     opacity: 1;
-    filter: brightness(0) saturate(100%) invert(27%) sepia(94%) saturate(3749%) hue-rotate(347deg) brightness(104%) contrast(101%);
-    /* Этот фильтр превращает чёрный цвет в #FF3F42 */
+    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
+    /* Этот фильтр даёт синий #0066FF */
 }
 
 /* ---------- ДВУХКОЛОНОЧНАЯ СЕТКА ДЛЯ ОСНОВНОГО КОНТЕНТА ---------- */
@@ -242,7 +235,7 @@ body {
     color: var(--color-dark-gray);
     font-size: 1rem;
     line-height: 1.6;
-    border-left: 2px solid #FFC999; /* Тонкая серая линия слева */
+    border-left: 2px solid #ACCDFF; /* Тонкая серая линия слева */
     padding-left: 16px;
 }
 
@@ -253,7 +246,7 @@ body {
 .job__achievements a {
     color: var(--color-accent);
     text-decoration: none;
-    border-bottom: 1px solid var(--color-light-gray);
+    border-bottom: 1px solid var(--color-accent);
 }
 
 .job__achievements a:hover {
@@ -292,28 +285,21 @@ body {
     padding: 8px 18px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: white;  /* Белый текст */
-    border: none;  /* Убираем обводку */
-    border-radius: 30px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;  /* Плавное движение */
-    cursor: default;  /* Обычный курсор */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: var(--color-dark-gray);
+    background-color: var(--color-white);
+    border: none;
+    border-radius: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    cursor: default;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* Эффект при наведении — только подъём и тень */
 .skill-tag:hover {
-    transform: translateY(-3px);  /* Поднимаем вверх */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    /* Цвет НЕ меняется */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-accent); /* Синий при наведении */
+    color: white;
 }
-
-/* Распределяем цвета по навыкам (можно добавить больше) */
-.skill-tag:nth-child(6n+1) { background-color: #FFE175; }  /* Жёлтый */
-.skill-tag:nth-child(6n+2) { background-color: #FFAA5E; }  /* Оранжевый */
-.skill-tag:nth-child(6n+3) { background-color: #8AC6D0; }  /* Голубой */
-.skill-tag:nth-child(6n+4) { background-color: #FFA5B0; }  /* Розовый */
-.skill-tag:nth-child(6n+5) { background-color: #FFE175; }  /* Повтор жёлтого */
-.skill-tag:nth-child(6n+6) { background-color: #FFAA5E; }  /* Повтор оранжевого */
 
 /* Стили для списка навыков (как альтернатива тегам) */
 .skills__list {
@@ -452,8 +438,9 @@ body {
 /* ==================== */
 
 .education__item {
+    margin-top: 20px;
     margin-bottom: 24px;
-    padding-bottom: 16px;
+
 }
 
 .education__item:last-child {
@@ -559,19 +546,108 @@ body {
 /* ==================== */
 /* ПОРТФОЛИО-ГАЛЕРЕЯ */
 /* ==================== */
+/* ==================== */
+/* ВЫДАЮЩИЕСЯ ПРОЕКТЫ */
+/* ==================== */
+
+.portfolio-grid-featured {
+    margin-bottom: 40px;
+}
+
+.portfolio-item-featured {
+    grid-column: span 2; /* Занимает 2 колонки */
+}
+
+.portfolio-item-featured .portfolio-image-wrapper {
+    aspect-ratio: 16 / 9; /* Более широкий формат для больших проектов */
+}
+
+.portfolio-item-featured .portfolio-caption-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-black);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.portfolio-item-featured .portfolio-caption-sub {
+    font-size: 0.9rem;
+    color: var(--color-medium-gray);
+    display: block;
+}
+
+.portfolio-item-featured:hover {
+    transform: scale(1.03); /* Чуть меньше увеличение для больших плиток */
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 900px) {
+    .portfolio-item-featured {
+        grid-column: span 1; /* На мобильных снова по 1 колонке */
+    }
+    
+    .portfolio-item-featured .portfolio-image-wrapper {
+        aspect-ratio: 1 / 1; /* Квадратные на мобильных */
+    }
+}
+
+.portfolio-section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-black);
+    margin: 40px 0 12px 0;
+}
+
+.portfolio-category {
+    margin: 30px 0 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* ==================== */
+/* КАТЕГОРИИ ПОРТФОЛИО (RU/ENG) */
+/* ==================== */
+
+.portfolio-category {
+    margin: 30px 0 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+.portfolio-category-tag {
+    display: inline-block;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-medium-gray);
+    border: none;
+    background: none;
+}
+
+.tag-ru,
+.tag-eng {
+    color: var(--color-medium-gray); /* Одинаковый серый для всех */
+}
 
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    gap: 25px;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 .portfolio-item {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1; /* Квадратные ячейки */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: scale(1.05); /* Увеличивается вся карточка */
+    z-index: 10;
 }
 
 .portfolio-link {
@@ -579,16 +655,21 @@ body {
     width: 100%;
     height: 100%;
     text-decoration: none;
+    color: inherit;
 }
 
 .portfolio-image-wrapper {
     position: relative;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-image-wrapper {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .portfolio-image {
@@ -596,14 +677,6 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
-}
-
-.portfolio-item:hover .portfolio-image {
-    transform: scale(1.1); /* Увеличение при наведении */
-}
-
-.portfolio-item:hover .portfolio-image-wrapper {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .portfolio-overlay {
@@ -616,7 +689,7 @@ body {
     color: white;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none; /* Чтобы не мешало клику */
+    pointer-events: none;
 }
 
 .portfolio-item:hover .portfolio-overlay {
@@ -630,22 +703,164 @@ body {
     color: white;
     font-size: 0.8rem;
     font-weight: 500;
-    border-radius: 20px;
+    border-radius: 4px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
+.portfolio-caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--color-medium-gray);
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    text-align: left;
+}
+
+.portfolio-item:hover .portfolio-caption {
+    color: var(--color-black);
+}
+
 /* Адаптация для мобильных */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .portfolio-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 20px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .portfolio-grid {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+    
+    .portfolio-item:hover {
+        transform: scale(1.02);
+    }
+}
+
+/* ==================== */
+/* ПОРТФОЛИО FULLWIDTH */
+/* ==================== */
+
+.portfolio-fullwidth {
+    margin: 80px 0 60px 0;
+    width: 100%;
+    position: relative;  /* Добавь это */
+    z-index: 3;          /* Добавь это */
+}
+
+.portfolio-fullwidth .section__title {
+    font-size: 2.5rem;           /* Как у опыта */
+    font-weight: 700;
+    color: var(--color-accent);
+    border-bottom: none;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 8px;           /* Чуть меньше отступ */
+}
+
+.portfolio-fullwidth-subtitle {
+    font-size: 1rem;
+    color: var(--color-medium-gray);
+    margin-bottom: 40px;
+}
+
+.portfolio-fullwidth-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.portfolio-fullwidth-item {
+    width: 100%;
+}
+
+.portfolio-fullwidth-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.portfolio-fullwidth-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--color-light-gray);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.portfolio-fullwidth-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.portfolio-fullwidth-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.portfolio-fullwidth-item:hover .portfolio-fullwidth-overlay {
+    opacity: 1;
+}
+
+.portfolio-fullwidth-social {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+}
+
+.portfolio-fullwidth-caption {
+    margin-top: 12px;
+}
+
+.portfolio-fullwidth-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 2px;
+}
+
+.portfolio-fullwidth-sub {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-medium-gray);
+}
+
+/* Убираем все эффекты при наведении на карточку */
+.portfolio-fullwidth-item:hover .portfolio-fullwidth-image {
+    /* Никаких изменений */
+}
+
+.portfolio-fullwidth-item:hover {
+    transform: none; /* Убираем увеличение */
+}
+
+/* Адаптация */
+@media (max-width: 768px) {
+    .portfolio-fullwidth-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
     }
 }
