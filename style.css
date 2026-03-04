@@ -848,11 +848,6 @@ body {
     color: var(--color-medium-gray);
 }
 
-/* Убираем все эффекты при наведении на карточку */
-.portfolio-fullwidth-item:hover .portfolio-fullwidth-image {
-    /* Никаких изменений */
-}
-
 .portfolio-fullwidth-item:hover {
     transform: none; /* Убираем увеличение */
 }
