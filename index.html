@@ -513,5 +513,83 @@
             }, 3000);
         });
     </script>
+
+    <div class="cursor-dot"></div>
+
+    <script>
+    // Курсор с хвостом
+    (function() {
+        // Удаляем старые точки
+        const oldDots = document.querySelectorAll('.cursor-dot, .cursor-trail');
+        oldDots.forEach(dot => dot.remove());
+        
+        // Создаём основную точку
+        const cursor = document.createElement('div');
+        cursor.className = 'cursor-dot';
+        document.body.appendChild(cursor);
+        
+        // Создаём точку-хвост (их может быть несколько)
+        const trailCount = 5; // Количество точек в хвосте
+        const trails = [];
+        
+        for (let i = 0; i < trailCount; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.opacity = 1 - (i / trailCount) * 0.7; // Прозрачность убывает
+            trail.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.15})`; // Размер убывает
+            document.body.appendChild(trail);
+            trails.push({
+                element: trail,
+                x: 0,
+                y: 0
+            });
+        }
+        
+        let mouseX = 0, mouseY = 0;
+        
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Основная точка сразу за курсором
+            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        });
+        
+        // Анимация хвоста
+        function animateTrail() {
+            // Каждая точка хвоста догоняет предыдущую
+            let prevX = mouseX;
+            let prevY = mouseY;
+            
+            trails.forEach((trail, index) => {
+                // Плавное движение к предыдущей точке
+                trail.x += (prevX - trail.x) * 0.15;
+                trail.y += (prevY - trail.y) * 0.15;
+                
+                trail.element.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
+                
+                prevX = trail.x;
+                prevY = trail.y;
+            });
+            
+            requestAnimationFrame(animateTrail);
+        }
+        
+        animateTrail();
+        
+        // Прячем курсор при уходе с окна
+        document.addEventListener('mouseleave', function() {
+            cursor.style.opacity = '0';
+            trails.forEach(trail => trail.element.style.opacity = '0');
+        });
+        
+        document.addEventListener('mouseenter', function() {
+            cursor.style.opacity = '1';
+            trails.forEach((trail, i) => {
+                trail.element.style.opacity = 1 - (i / trailCount) * 0.7;
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
