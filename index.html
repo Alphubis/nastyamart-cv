@@ -9,40 +9,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.11.0/lottie.min.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header__content">
-                <!-- Фото теперь будет тянуться по высоте -->
-                <div class="header__photo-wrapper">
-                    <img src="my-photo.jpg" alt="Анастасия Мартынцева" class="header__photo-img">
-                </div>
-                
-                <!-- Информация о себе -->
-                <div class="header__info">
-                    <h1 class="header__title">
-                        <span class="typing-line" data-text="Мартынцева">Мартынцева</span>
-                        <span class="typing-line" data-text="Анастасия">Анастасия</span>
-                    </h1>
-                    
-                    <!-- Контакты в шапке (оставляем здесь) -->
-                    <div class="header__contacts">
-                        <a href="tel:+79323089933" class="contact-item">
-                            <img src="icons/phone.svg" alt="Phone" class="contact-icon">
-                            +7 (932) 308 99-33
-                        </a>
-                        <a href="https://t.me/martynceva_anastasia" target="_blank" class="contact-item">
-                            <img src="icons/telegram.svg" alt="Telegram" class="contact-icon">
-                            @martynceva_anastasia
-                        </a>
-                        <a href="mailto:martynceva.nastya@gmail.com" class="contact-item">
-                            <img src="icons/mail.svg" alt="Email" class="contact-icon">
-                            martynceva.nastya@gmail.com
-                        </a>
-                    </div>
-                </div>
+    <!-- Главный блок на весь экран -->
+    <section class="hero">
+        <div class="hero__content">
+            <div class="hero__photo-wrapper">
+                <img src="my-photo.jpg" alt="Анастасия Мартынцева" class="hero__photo-img">
+            </div>
+            
+            <h1 class="hero__title">
+                Мартынцева<br>Анастасия
+            </h1>
+            
+            <div class="hero__contacts">
+                <a href="tel:+79323089933" class="hero-contact-item">
+                    <img src="icons/phone.svg" alt="Phone" class="hero-contact-icon">
+                    <span>+7 (932) 308 99-33</span>
+                </a>
+                <a href="mailto:martynceva.nastya@gmail.com" class="hero-contact-item">
+                    <img src="icons/mail.svg" alt="Email" class="hero-contact-icon">
+                    <span>martynceva.nastya@gmail.com</span>
+                </a>
+                <a href="https://t.me/martynceva_anastasia" target="_blank" class="hero-contact-item">
+                    <img src="icons/telegram.svg" alt="Telegram" class="hero-contact-icon">
+                    <span>@martynceva_anastasia</span>
+                </a>
             </div>
         </div>
-    </header>
+        
+        <!-- Стрелка для скролла -->
+        <div class="scroll-arrow">↓</div>
+    </section>
+
+    <!-- Маркер границы hero -->
+    <div class="hero-marker"></div>
+
+    <!-- Невидимая линия для отслеживания границы -->
+    <div class="hero-boundary"></div>
 
     <main>
         <div class="container main-grid">
@@ -60,7 +62,7 @@
 
                 <!-- Опыт работы -->
                 <section class="experience section">
-                    <h2 class="section__title">ОПЫТ РАБОТЫ — 2 ГОДА 8 МЕСЯЦЕВ</h2>
+                    <h2 class="section__title">2 ГОДА 8 МЕСЯЦЕВ КАК РАБОТАЮ</h2>
                     
                     <!-- Jet Style -->
                     <div class="job">
@@ -261,7 +263,7 @@
             <aside class="sidebar">
                 <!-- Навыки -->
                 <section class="section">
-                    <h2 class="section__title">Навыки</h2>
+                    <h2 class="section__title">УМЕЮ В</h2>
                     
                     <div class="skills__category">
                         <div class="skills__tags">
@@ -282,7 +284,7 @@
                 </section>
                 <!-- НОВЫЙ РАЗДЕЛ: ОБРАЗОВАНИЕ -->
                 <section class="section">
-                    <h2 class="section__title">Образование</h2>
+                    <h2 class="section__title">ОБУЧИЛАСЬ</h2>
                     <div class="education">
                         <div class="education__item">
                             <h3 class="education__degree">Информатика и вычислительная техника</h3>
@@ -395,30 +397,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <!-- Место для анимации -->
-    <div id="touchdesigner-effect" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; background-color: transparent;"></div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Загружаем фоновую анимацию');
-        
-        var container = document.getElementById('touchdesigner-effect');
-        console.log('Контейнер найден:', container);
-        
-        // Анимация будет на фоне, но контент должен быть выше
-        lottie.loadAnimation({
-            container: container,
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            path: 'my-animation.json'  // используем test.json, который работает
-        });
-        
-        console.log('Анимация запущена');
-    });
-    </script>
-
     <style>
     /* Весь контент должен быть выше анимации */
     .header, .main-grid, .footer {
@@ -457,139 +435,56 @@
         window.addEventListener('load', resizePhoto);
         window.addEventListener('resize', resizePhoto);
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lines = document.querySelectorAll('.typing-line');
-            const firstLine = lines[0];
-            const lastLine = lines[1];
-            
-            // Функция для получения точной ширины текста
-            function getTextWidth(element) {
-                const span = document.createElement('span');
-                span.style.font = window.getComputedStyle(element).font;
-                span.style.visibility = 'hidden';
-                span.style.position = 'absolute';
-                span.style.whiteSpace = 'nowrap';
-                span.style.fontSize = '6rem'; // Явно указываем размер
-                span.style.fontWeight = '700';
-                span.textContent = element.textContent;
-                document.body.appendChild(span);
-                const width = span.offsetWidth;
-                document.body.removeChild(span);
-                return width + 'px'; // Возвращаем с единицами измерения
-            }
-            
-            // Получаем реальную ширину для каждой строки
-            const firstLineWidth = getTextWidth(firstLine);
-            const lastLineWidth = getTextWidth(lastLine);
-            
-            // Устанавливаем CSS-переменные для анимации
-            firstLine.style.setProperty('--target-width', firstLineWidth);
-            firstLine.style.setProperty('--duration', '1.5s');
-            firstLine.style.setProperty('--steps', firstLine.textContent.length);
-            
-            lastLine.style.setProperty('--target-width', lastLineWidth);
-            lastLine.style.setProperty('--duration', '1.5s');
-            lastLine.style.setProperty('--steps', lastLine.textContent.length);
-            
-            // Запускаем анимацию первой строки
-            firstLine.classList.add('animating');
-            
-            // Тайминг для второй строки
-            setTimeout(() => {
-                // Убираем курсор у первой строки
-                firstLine.classList.remove('animating');
-                firstLine.style.borderRightColor = 'transparent';
-                
-                // Запускаем анимацию второй строки
-                lastLine.classList.add('animating');
-            }, 1500);
-            
-            // Финальный этап
-            setTimeout(() => {
-                lastLine.classList.remove('animating');
-                lastLine.classList.add('cursor-blink');
-                lastLine.style.borderRightColor = 'var(--color-accent)';
-            }, 3000);
-        });
-    </script>
 
-    <div class="cursor-dot"></div>
+    <!-- Новый курсор с правильным позиционированием -->
+    <svg class="curzr-motion" style="position: fixed; top: 0; left: 0; width: 32px; height: 32px; pointer-events: none; z-index: 999999; transform: translate(calc(-50% + 0px), calc(-50% + 0px));">
+    <filter id="motionblur" x="-100%" y="-100%" width="400%" height="400%">
+        <feGaussianBlur class="curzr-motion-blur" stdDeviation="0, 0" />
+    </filter>
+    <circle cx="16" cy="16" r="8" class="cursor-circle" fill="#0066FF" filter="url(#motionblur)" />
+    </svg>
 
     <script>
-    // Курсор с хвостом
+    // ИДЕАЛЬНАЯ ВЕРСИЯ - проверка попадания курсора в hero
     (function() {
-        // Удаляем старые точки
-        const oldDots = document.querySelectorAll('.cursor-dot, .cursor-trail');
-        oldDots.forEach(dot => dot.remove());
+    const cursor = document.querySelector(".curzr-motion")
+    const hero = document.querySelector('.hero')
+    
+    if (!cursor || !hero) return
+    
+    // Начальный цвет
+    cursor.classList.add('cursor-white')
+    
+    document.addEventListener('mousemove', (e) => {
+        // Получаем координаты и размеры hero
+        const heroRect = hero.getBoundingClientRect()
         
-        // Создаём основную точку
-        const cursor = document.createElement('div');
-        cursor.className = 'cursor-dot';
-        document.body.appendChild(cursor);
+        // Проверяем, находится ли курсор ВНУТРИ hero
+        const isInsideHero = (
+        e.clientX >= heroRect.left &&
+        e.clientX <= heroRect.right &&
+        e.clientY >= heroRect.top &&
+        e.clientY <= heroRect.bottom
+        )
         
-        // Создаём точку-хвост (их может быть несколько)
-        const trailCount = 5; // Количество точек в хвосте
-        const trails = [];
-        
-        for (let i = 0; i < trailCount; i++) {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.opacity = 1 - (i / trailCount) * 0.7; // Прозрачность убывает
-            trail.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.15})`; // Размер убывает
-            document.body.appendChild(trail);
-            trails.push({
-                element: trail,
-                x: 0,
-                y: 0
-            });
+        // Меняем цвет
+        if (isInsideHero) {
+        if (!cursor.classList.contains('cursor-white')) {
+            cursor.classList.add('cursor-white')
+            cursor.classList.remove('cursor-black')
         }
-        
-        let mouseX = 0, mouseY = 0;
-        
-        document.addEventListener('mousemove', function(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Основная точка сразу за курсором
-            cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-        });
-        
-        // Анимация хвоста
-        function animateTrail() {
-            // Каждая точка хвоста догоняет предыдущую
-            let prevX = mouseX;
-            let prevY = mouseY;
-            
-            trails.forEach((trail, index) => {
-                // Плавное движение к предыдущей точке
-                trail.x += (prevX - trail.x) * 0.15;
-                trail.y += (prevY - trail.y) * 0.15;
-                
-                trail.element.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
-                
-                prevX = trail.x;
-                prevY = trail.y;
-            });
-            
-            requestAnimationFrame(animateTrail);
+        } else {
+        if (!cursor.classList.contains('cursor-black')) {
+            cursor.classList.add('cursor-black')
+            cursor.classList.remove('cursor-white')
         }
-        
-        animateTrail();
-        
-        // Прячем курсор при уходе с окна
-        document.addEventListener('mouseleave', function() {
-            cursor.style.opacity = '0';
-            trails.forEach(trail => trail.element.style.opacity = '0');
-        });
-        
-        document.addEventListener('mouseenter', function() {
-            cursor.style.opacity = '1';
-            trails.forEach((trail, i) => {
-                trail.element.style.opacity = 1 - (i / trailCount) * 0.7;
-            });
-        });
+        }
+    })
     })();
     </script>
+
+    <!-- Three.js для фоновой анимации -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

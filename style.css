@@ -7,7 +7,7 @@
 :root {
     --font-main: 'Roboto', sans-serif;
     --font-heading: 'Roboto', sans-serif;
-    --color-accent: #1f38ff;
+    --color-accent: #0a0e27;
     /* Монохромная палитра */
     --color-black: #0d1240;
     --color-dark-gray: #2d336c;
@@ -19,6 +19,15 @@
     /* Типографика */
     --line-height-normal: 1.5;
     --letter-spacing-tight: -0.02em;
+}
+
+/* Подключение своего шрифта */
+@font-face {
+    font-family: 'MyFont';
+    src: url('fonts/my_font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* Сброс отступов */
@@ -281,7 +290,7 @@ body {
 .skills__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 4px;
     margin-top: 5px;
 }
 
@@ -290,20 +299,11 @@ body {
     padding: 8px 18px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--color-dark-gray);
-    background-color: var(--color-white);
+    color: #FFFFFF; /* Белый текст */
+    background-color: var(--color-accent); /* Синий фон #0066FF */
     border: none;
-    border-radius: 0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    border-radius: 0; /* Прямые углы */
     cursor: default;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.skill-tag:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    background-color: var(--color-accent); /* Синий при наведении */
-    color: white;
 }
 
 /* Стили для списка навыков (как альтернатива тегам) */
@@ -891,56 +891,222 @@ body {
     }
 }
 
-/* ==================== */
-/* КУРСОР С ХВОСТОМ */
-/* ==================== */
+/* Новый курсор */
+.curzr-motion circle {
+  filter: url(#motionblur);
+}
 
 html {
+  cursor: none;
+}
+
+/* Фоновая анимация Three.js только для hero */
+#webGLApp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hero блок поверх анимации */
+.hero {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+
+/* Весь остальной контент без фоновой анимации */
+main, footer {
+  position: relative;
+  z-index: 3;
+  background-color: var(--color-white); /* Белый фон для остального контента */
+}
+
+/* Убедимся, что контент выше анимации */
+.header, .main-grid, .footer, .portfolio-fullwidth {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* ==================== */
+/* HERO БЛОК НА ВЕСЬ ЭКРАН */
+/* ==================== */
+
+.hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+}
+
+.hero__content {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero__photo-wrapper {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2rem;
+    border-radius: 0; /* Квадратное фото */
+    overflow: hidden;
+}
+
+.hero__photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero__title {
+    font-size: 14rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-white);
+    font-family: 'MyFont', var(--font-heading), serif !important;;
+}
+
+.hero__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.hero-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    filter: brightness(0) invert(1);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+}
+
+.hero-contact-item:hover {
+    color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.hero-contact-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.hero-contact-item:hover .hero-contact-icon {
+    opacity: 1;
+    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
+}
+
+/* Стрелка для скролла */
+.scroll-arrow {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--color-white);
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    z-index: 3;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .hero__title {
+        font-size: 3rem;
+    }
+    
+    .hero__photo-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hero__contacts {
+        gap: 1.5rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-contact-item {
+        font-size: 1rem;
+    }
+}
+
+.cursor-white circle {
+    fill: #FFFFFF !important;
+}
+
+.cursor-black circle {
+    fill: #000000 !important;
+}
+
+.hero-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Базовые стили для текста */
+.about__text, .job__achievements {
+    line-height: 2; /* 140% межстрочный интервал */
+}
+
+/* Прячем системный курсор на всех интерактивных элементах */
+a, button, .contact-item, .hero-contact-item, .portfolio-item, 
+.portfolio-fullwidth-item, .skill-tag, .scroll-arrow, 
+.pdf-link, .modal-close, .copy-btn, .export-btn,
+input[type="color"], input[type="text"], textarea,
+.curzr-hover, .btn, [onclick], .portfolio-link,
+.portfolio-fullwidth-link, .job__achievements a {
     cursor: none;
 }
 
-.cursor-dot {
-    position: fixed;
-    width: 16px;
-    height: 16px;
-    background-color: #0066FF;
-    border: 2px solid white;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999999;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    padding: 0;
-    top: 0;
-    left: 0;
-    box-shadow: 0 0 20px rgba(0,102,255,0.5);
-    transition: opacity 0.2s ease;
+/* Анимация для витрины постов */
+.portfolio-item {
+    transition: transform 0.3s ease;
 }
 
-.cursor-trail {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    background-color: #0066FF;
-    border: 1px solid rgba(255,255,255,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999998;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    padding: 0;
-    top: 0;
-    left: 0;
-    transition: opacity 0.2s ease;
+.portfolio-item:hover {
+    transform: scale(1.02); /* Увеличение на 2% */
 }
 
-/* На мобильных отключаем */
-@media (max-width: 768px) {
-    html {
-        cursor: auto;
-    }
-    .cursor-dot,
-    .cursor-trail {
-        display: none;
-    }
+/* Для больших плиток (featured) можно чуть меньше */
+.portfolio-item-featured:hover {
+    transform: scale(1.01);
 }
