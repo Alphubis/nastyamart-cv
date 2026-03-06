@@ -187,10 +187,6 @@ body {
     margin-bottom: 60px;
 }
 
-.section:last-child {
-    margin-bottom: 0;
-}
-
 .section__title {
     font-size: 2rem;
     font-weight: 600;
@@ -354,15 +350,6 @@ body {
     border-bottom-color: var(--color-accent);
 }
 
-/* ---------- ПОДВАЛ ---------- */
-.footer {
-    border-top: 1px solid var(--color-border);
-    padding: 32px 0;
-    text-align: center;
-    color: var(--color-medium-gray);
-    font-size: 0.9rem;
-}
-
 /* ---------- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ---------- */
 @media (max-width: 900px) {
     .container {
@@ -512,7 +499,7 @@ body {
 }
 
 /* Делаем контент поверх анимации */
-.header, .main-grid, .footer {
+.header, .main-grid {
     position: relative;
     z-index: 2;
     background-color: transparent !important
@@ -777,20 +764,26 @@ body {
 /* ==================== */
 
 .portfolio-fullwidth {
-    margin: 80px 0 60px 0;
+    margin: 80px 0 0 0;
+    padding: 60px 0 0 0;
     width: 100%;
-    position: relative;  /* Добавь это */
-    z-index: 3;          /* Добавь это */
+    position: relative;
+    z-index: 3;
+    background-color: var(--color-white); /* Белый фон на всю ширину */
+}
+
+.portfolio-fullwidth .container {
+    background-color: transparent; /* Прозрачный внутри */
 }
 
 .portfolio-fullwidth .section__title {
-    font-size: 2.5rem;           /* Как у опыта */
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--color-accent);
     border-bottom: none;
     text-transform: none;
     letter-spacing: normal;
-    margin-bottom: 8px;           /* Чуть меньше отступ */
+    margin-bottom: 8px;
 }
 
 .portfolio-fullwidth-subtitle {
@@ -926,7 +919,7 @@ main, footer {
 }
 
 /* Убедимся, что контент выше анимации */
-.header, .main-grid, .footer, .portfolio-fullwidth {
+.header, .main-grid, .portfolio-fullwidth {
   position: relative;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
@@ -1109,4 +1102,139 @@ input[type="color"], input[type="text"], textarea,
 /* Для больших плиток (featured) можно чуть меньше */
 .portfolio-item-featured:hover {
     transform: scale(1.01);
+}
+
+/* ==================== */
+/* НОВЫЙ ФУТЕР */
+/* ==================== */
+
+.footer-new {
+    position: relative;
+    z-index: 3;
+    background-color: var(--color-white);
+    padding: 360px 0;
+}
+
+.footer-new__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.footer-new__left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.footer-new__title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-family: var(--font-display, 'Roboto', sans-serif);
+    color: var(--color-black);
+    margin: 0;
+}
+
+.footer-new__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-new__contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-dark-gray);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-new__contact:hover {
+    color: var(--color-accent);
+}
+
+.footer-new__contact-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.footer-new__contact:hover .footer-new__contact-icon {
+    opacity: 1;
+    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
+}
+
+/* Кот */
+.footer-cat {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+.footer-cat #bongo-cat {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: contain;
+}
+
+/* Анимация кота */
+#paw-right--up, 
+#paw-right--down, 
+#paw-left--up,
+#paw-left--down {
+    animation: blink 0.3s infinite;
+}
+
+#paw-right--up,
+#paw-left--down {
+    animation-delay: 0.15s;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    49% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Адаптация */
+@media (max-width: 900px) {
+    .footer-new__content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-new__title {
+        font-size: 2.5rem;
+    }
+    
+    .footer-new__contacts {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-cat {
+        height: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-new {
+        padding: 40px 0;
+    }
+    
+    .footer-new__title {
+        font-size: 2rem;
+    }
+    
+    .footer-cat {
+        height: 200px;
+    }
 }
