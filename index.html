@@ -11,40 +11,52 @@
 <body>
     <!-- Главный блок на весь экран -->
     <section class="hero">
-        <div class="hero__content">
-            <div class="hero__photo-wrapper">
-                <img src="my-photo.jpg" alt="Анастасия Мартынцева" class="hero__photo-img">
-            </div>
-            
-            <h1 class="hero__title">
-                Мартынцева<br>Анастасия
-            </h1>
-            
-            <div class="hero__contacts">
-                <a href="tel:+79323089933" class="hero-contact-item">
-                    <img src="icons/phone.svg" alt="Phone" class="hero-contact-icon">
-                    <span>+7 (932) 308 99-33</span>
-                </a>
-                <a href="mailto:martynceva.nastya@gmail.com" class="hero-contact-item">
-                    <img src="icons/mail.svg" alt="Email" class="hero-contact-icon">
-                    <span>martynceva.nastya@gmail.com</span>
-                </a>
-                <a href="https://t.me/martynceva_anastasia" target="_blank" class="hero-contact-item">
-                    <img src="icons/telegram.svg" alt="Telegram" class="hero-contact-icon">
-                    <span>@martynceva_anastasia</span>
-                </a>
+        <div class="container">
+            <div class="hero__grid">
+                <!-- Левая колонка -->
+                <div class="hero__left">
+                    <!-- Фото в левом верхнем углу -->
+                    <div class="hero__photo-wrapper">
+                        <img src="my-photo.jpg" alt="Анастасия Мартынцева" class="hero__photo-img">
+                    </div>
+                    
+                    <!-- Имя в левом нижнем углу -->
+                    <div class="hero__name-wrapper">
+                        <h1 class="hero__name">
+                            <span class="hero__surname">мартынцева</span>
+                            <span class="hero__firstname">анастасия</span>
+                        </h1>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка -->
+                <div class="hero__right">
+                    <!-- Контакты с иконками в правом верхнем углу -->
+                    <div class="hero__contacts">
+                        <a href="mailto:martynceva.nastya@gmail.com" class="hero__contact-item">
+                            <img src="icons/mail.svg" alt="Email" class="hero__contact-icon">
+                            <span class="hero__contact-text">martynceva.nastya@gmail.com</span>
+                        </a>
+                        <a href="https://t.me/martynceva_anastasia" target="_blank" class="hero__contact-item">
+                            <img src="icons/telegram.svg" alt="Telegram" class="hero__contact-icon">
+                            <span class="hero__contact-text">@martynceva_anastasia</span>
+                        </a>
+                        <a href="tel:+79323089933" class="hero__contact-item">
+                            <img src="icons/phone.svg" alt="Phone" class="hero__contact-icon">
+                            <span class="hero__contact-text">+7 932 308 99-33</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Возраст и город в правом нижнем углу -->
+                    <div class="hero__info">
+                        <span class="hero__age">23 года</span>
+                        <span class="hero__city">Екатеринбург</span>
+                    </div>
+                    <div class="scroll-arrow">↓</div>
+                </div>
             </div>
         </div>
-        
-        <!-- Стрелка для скролла -->
-        <div class="scroll-arrow">↓</div>
     </section>
-
-    <!-- Маркер границы hero -->
-    <div class="hero-marker"></div>
-
-    <!-- Невидимая линия для отслеживания границы -->
-    <div class="hero-boundary"></div>
 
     <main>
         <div class="container main-grid">
@@ -62,7 +74,7 @@
 
                 <!-- Опыт работы -->
                 <section class="experience section">
-                    <h2 class="section__title">2 ГОДА 8 МЕСЯЦЕВ КАК РАБОТАЮ</h2>
+                    <h2 class="section__title">2 ГОДА 8 МЕСЯЦЕВ РАБОТЫ</h2>
                     
                     <!-- Jet Style -->
                     <div class="job">
@@ -71,12 +83,11 @@
                             <div class="job__period">Август 2024 - Март 2025 (8 месяцев)</div>
                         </div>
                         <ul class="job__achievements">
-                            <li>Создавала визуалы для постов в соцсети с помощью Figma, After Effects, Blender, Midjourney и др.</li>
-                            <li>Спроектировала и сверстала лендинг для продукта, который обеспечил успешное заключение сделки — <a href="https://jet.style/screen-space-vr" target="_blank">screen-space-vr</a></li>
-                            <li>Проектировала ключевые страницы корпоративного сайта в новом дизайне и координировала работу с разработчиками — <a href="https://jetstyle.ru" target="_blank">jetstyle.ru</a></li>
+                            <li>Работала в отделе PR на российском и иностранном направлениях в паре с арт-директором, копирайтерами и менеджерами</li>
+                            <li>Проектировала ключевые страницы корпоративного сайта в новом дизайне совместно с отделом разработки — <a href="https://jetstyle.ru" target="_blank">jetstyle.ru</a></li>
                             <li>Оформляла презентации о продуктах компании для отдела продаж, что помогло эффективно привлекать новых клиентов</li>
-                            <li>Подготавливала визуалы по кейсам для сайта — <a href="https://jet.style/portfolio/eoracle" target="_blank">кейс Eoracle</a>, <a href="https://tagline.ru/jetstyle/cases/proekt-7" target="_blank">проект на Tagline</a></li>
-                            <li>Выявила элементы с высоким удержанием через Яндекс Метрику и создала шаблон для вовлеченности — <a href="https://jetstyle.ru/portfolio/ar-mirror" target="_blank">кейс AR Mirror</a></li>
+                            <li>Подготавливала визуалы по кейсам для портфолио и конкурсов — <a href="https://jet.style/portfolio/eoracle" target="_blank">кейс Eoracle</a>, <a href="https://tagline.ru/jetstyle/cases/proekt-7" target="_blank">проект на Tagline</a></li>
+                            <li>Создала шаблон структуры кейсов для портфолио, проведя исследование с помощью Яндекс Метрики, что повысило удержание и прочитываемость кейсов — <a href="https://jetstyle.ru/portfolio/ar-mirror" target="_blank">кейс AR Mirror</a></li>
                             <li>Писала ТЗ, аудиты и гайдлайны для разработчиков, копирайтеров и дизайнеров</li>
                         </ul>
                         <!-- ГАЛЕРЕЯ ПОСТОВ В JETSTYLE -->
@@ -95,7 +106,7 @@
                                     </div>
                                     <div class="portfolio-caption">
                                         <span class="portfolio-caption-title">Screen Space VR</span>
-                                        <span class="portfolio-caption-sub">Лендинг для продукта, обеспечивший сделку</span>
+                                        <span class="portfolio-caption-sub">Спроектировала и сверстала лендинг для продукта, который обеспечил успешное заключение сделки</span>
                                     </div>
                                 </a>
                             </div>

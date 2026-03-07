@@ -24,7 +24,7 @@
 /* Подключение своего шрифта */
 @font-face {
     font-family: 'MyFont';
-    src: url('fonts/my_font.ttf') format('truetype');
+    src: url('fonts/my_font.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -46,7 +46,7 @@ body, button, input, textarea {
 }
 
 /* Для заголовков тоже Roboto (можно другой шрифт, если хочешь) */
-h1, h2, h3, h4, h5, h6, .header__title, .section__title, .job__company {
+h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     font-family: var(--font-heading);
 }
 
@@ -67,111 +67,266 @@ body {
     background-color: transparent !important;
 }
 
-/* ---------- ШАПКА (СИЛЬНАЯ ТИПОГРАФИКА) ---------- */
-.header {
-    padding: 80px 0 40px 0;
-}
+/* ==================== */
+/* HERO БЛОК - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+/* ==================== */
 
-.header__content {
-    display: grid;
-    grid-template-columns: 180px 1fr; /* Фиксированная ширина для фото */
-    gap: 60px;
-    align-items: stretch; 
-}
-
-.header__photo-img {
-    width: 180px;           /* Фиксированная ширина */
-    height: 180px;          /* Фиксированная высота — фото всегда квадратное */
-    object-fit: cover;      /* Обрезаем, но сохраняем пропорции */
-    object-position: center 20%; /* Смещаем фокус чуть выше (чтобы лицо не обрезалось) */
-    display: block;
-    border: none;           /* Убираем обводку, если была */
-    filter: grayscale(80%) sepia(30%) hue-rotate(200deg) saturate(200%);
-}
-
-
-.header__title {
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-black);
-    margin-bottom: 8px;
-    display: flex;
-    flex-direction: column;  /* Строки друг под другом */
-}
-
-.typing-line {
-    display: inline-block;
-    white-space: nowrap;      /* Чтобы строка не переносилась внутри себя */
-    overflow: hidden;
-    width: 0;
-    border-right: 3px solid var(--color-accent);
-    animation: typing 1.5s steps(30, end) forwards;
-}
-
-.typing-line:first-child {
-    animation: typing 1.5s steps(30, end) forwards;
-}
-
-.typing-line:last-child {
-    animation: typing 1.5s steps(30, end) 1.5s forwards; /* Стартует через 1.5с */
-    border-right: 3px solid var(--color-accent);
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-.header__subtitle {
-        font-size: 1rem;
-    }
-
-/* ---------- КОНТАКТЫ В ШАПКЕ ---------- */
-.header__contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    padding-top: 32px;
-}
-
-/* Общие стили для всех контактов */
-.contact-item {
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: var(--color-dark-gray);
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.2s ease;
 }
 
-.contact-item:hover {
+.hero .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; /* Уменьшенный gap */
+    width: 100%;
+    height: 80vh;
+}
+
+/* Левая колонка */
+.hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.hero__photo-wrapper {
+    align-self: flex-start;
+}
+
+.hero__photo-img {
+    width: 160px; 
+    height: 160px;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    border: none;
+}
+
+.hero__name-wrapper {
+    align-self: flex-start;
+    margin-bottom: 0;
+}
+
+.hero__name {
+    margin: 0;
+    text-align: left;
+}
+
+.hero__surname {
+    display: block;
+    font-size: 12rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-white);
+    font-family: 'MyFont', var(--font-heading), serif !important;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.hero__firstname {
+    display: block;
+    font-size: 12rem; 
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-white);
+    font-family: 'MyFont', var(--font-heading), serif !important;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+/* Правая колонка */
+.hero__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    align-items: flex-end; /* Выравнивание по правому краю */
+    position: relative;
+}
+
+.hero__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end; /* Текст прижат к правому краю */
+}
+
+.hero__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    flex-direction: row; /* Иконка слева от текста */
+}
+
+.hero__contact-item:hover {
     color: var(--color-accent);
 }
 
-/* Стили для SVG иконок */
-.contact-icon {
+.hero__contact-icon {
     width: 20px;
     height: 20px;
-    filter: none;  /* Убираем возможные фильтры */
-    transition: filter 0.2s ease;
-}
-
-
-/* Если хочешь, чтобы иконки были серыми, а при наведении цветными */
-.contact-icon {
     opacity: 0.7;
+    transition: opacity 0.3s ease;
+    filter: brightness(0) invert(1);
 }
 
-.contact-item:hover .contact-icon {
+.hero__contact-item:hover .hero__contact-icon {
     opacity: 1;
     filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
-    /* Этот фильтр даёт синий #0066FF */
+}
+
+.hero__contact-text {
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.hero__info {
+    display: flex;
+    flex-direction: column; /* Возраст и город вертикально */
+    gap: 8px;
+    align-items: flex-end; /* Выравнивание по правому краю */
+    width: 100%;
+    margin-bottom: 0; /* Убираем отступ */
+    padding-bottom: 0; /* Убираем padding */
+    transform: translateY(-16px); /* Поднять */
+}
+
+.hero__age, .hero__city {
+    font-size: 1rem;
+    color: #fa8658;
+    text-align: right; /* Текст прижат к правому краю */
+    width: 100%;
+}
+
+/* Стрелка для скролла - внутри правой колонки */
+.hero__right .scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--color-white);
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.hero__right .scroll-arrow:hover {
+    opacity: 0.8;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(-50%) translateY(0);
+    }
+    40% {
+        transform: translateY(-50%) translateY(-15px);
+    }
+    60% {
+        transform: translateY(-50%) translateY(-7px);
+    }
+}
+
+/* Адаптация */
+@media (max-width: 1200px) {
+    .hero__surname,
+    .hero__firstname {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero__grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 40px;
+    }
+    
+    .hero__left {
+        height: auto;
+        gap: 40px;
+    }
+    
+    .hero__right {
+        height: auto;
+        gap: 40px;
+        align-items: flex-start;
+        padding-right: 0;
+    }
+    
+    .hero__contacts {
+        align-items: flex-start;
+    }
+    
+    .hero__info {
+        align-items: flex-start;
+    }
+    
+    .hero__age, .hero__city {
+        text-align: left;
+    }
+    
+    .scroll-arrow {
+        right: 20px;
+    }
+    
+    .hero__surname,
+    .hero__firstname {
+        font-size: 3rem;
+        white-space: normal;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero__surname,
+    .hero__firstname {
+        font-size: 2.2rem;
+    }
+    
+    .hero__photo-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .hero__title {
+        font-size: 3rem;
+    }
+    
+    .hero__photo-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hero__contacts {
+        gap: 1.5rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-contact-item {
+        font-size: 1rem;
+    }
 }
 
 /* ---------- ДВУХКОЛОНОЧНАЯ СЕТКА ДЛЯ ОСНОВНОГО КОНТЕНТА ---------- */
@@ -395,36 +550,6 @@ body {
 }
 
 /* ==================== */
-/* ФОТО НА ВСЮ ВЫСОТУ */
-/* ==================== */
-.header__photo-wrapper {
-    display: flex;
-    align-items: flex-start;      /* Прижимаем к верху */
-    height: 100%;                 /* Тянемся на всю высоту колонки */
-    width: 100%;                  /* Занимаем всю ширину колонки */
-    margin-right: 30px;  /* Отступ после фото */
-    margin-left: 0;        /* Убираем отступ слева */
-    padding-left: 0;       /* Убираем внутренний отступ */
-    justify-self: start;   /* Прижимаем к началу грид-ячейки */
-}
-
-.header__photo-img {
-    width: 100%;                  /* Ширина = ширина родителя */
-    height: auto;                 /* Высота подстроится */
-    aspect-ratio: 1 / 1;          /* Квадрат */
-    object-fit: cover;            /* Но тогда фото обрежется */
-    object-position: center top;
-}
-
-/* Чтобы фото-обертка тянулась на всю высоту колонки */
-.header__content {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 60px;
-    align-items: stretch;      /* Важно! Растягиваем ячейки по высоте */
-}
-
-/* ==================== */
 /* ОБРАЗОВАНИЕ В САЙДБАРЕ */
 /* ==================== */
 
@@ -496,13 +621,6 @@ body {
     height: auto !important;
     transform: translate(-50%, -50%) scale(1.1) !important; /* Немного увеличиваем для гарантии */
     object-fit: cover !important;
-}
-
-/* Делаем контент поверх анимации */
-.header, .main-grid {
-    position: relative;
-    z-index: 2;
-    background-color: transparent !important
 }
 
 @keyframes fadeIn {
@@ -904,13 +1022,6 @@ html {
   pointer-events: none;
 }
 
-/* Hero блок поверх анимации */
-.hero {
-  position: relative;
-  z-index: 2;
-  background-color: transparent;
-}
-
 /* Весь остальной контент без фоновой анимации */
 main, footer {
   position: relative;
@@ -923,138 +1034,6 @@ main, footer {
   position: relative;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
-}
-
-/* ==================== */
-/* HERO БЛОК НА ВЕСЬ ЭКРАН */
-/* ==================== */
-
-.hero {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    background-color: transparent;
-}
-
-.hero__content {
-    max-width: 1200px;
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.hero__photo-wrapper {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 2rem;
-    border-radius: 0; /* Квадратное фото */
-    overflow: hidden;
-}
-
-.hero__photo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero__title {
-    font-size: 14rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-white);
-    font-family: 'MyFont', var(--font-heading), serif !important;;
-}
-
-.hero__contacts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 5rem;
-}
-
-.hero-contact-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    filter: brightness(0) invert(1);
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-}
-
-.hero-contact-item:hover {
-    color: var(--color-accent);
-    transform: translateY(-2px);
-}
-
-.hero-contact-icon {
-    width: 24px;
-    height: 24px;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-.hero-contact-item:hover .hero-contact-icon {
-    opacity: 1;
-    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
-}
-
-/* Стрелка для скролла */
-.scroll-arrow {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    color: var(--color-white);
-    animation: bounce 2s infinite;
-    cursor: pointer;
-    z-index: 3;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-20px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-}
-
-/* Адаптация для мобильных */
-@media (max-width: 768px) {
-    .hero__title {
-        font-size: 3rem;
-    }
-    
-    .hero__photo-wrapper {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .hero__contacts {
-        gap: 1.5rem;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .hero-contact-item {
-        font-size: 1rem;
-    }
 }
 
 .cursor-white circle {
