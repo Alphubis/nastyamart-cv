@@ -345,7 +345,7 @@ document.querySelector('.scroll-arrow')?.addEventListener('click', () => {
     });
 });
 
-// Motion Blur Cursor - с адаптивным цветом (ИСПРАВЛЕННЫЙ)
+// Motion Blur Cursor - с адаптивным цветом
 (function() {
   class MotionBlur {
     constructor() {
