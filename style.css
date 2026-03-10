@@ -870,7 +870,6 @@ a, button, .hero-contact-item, .portfolio-item,
 .fullwidth-section {
     width: 100%;
     background-color: var(--color-white);
-    padding: 20px 0;
 }
 
 .fullwidth-section .container {
