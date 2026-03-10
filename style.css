@@ -8,7 +8,7 @@
     --color-black: #0d1240;
     --color-dark-gray: #2d336c;
     --color-medium-gray: #6d71a5;
-    --color-light-gray: #EEEEEE;
+    --color-light-gray: #b7b9c5;
     --color-white: #FFFFFF;
     --color-border: #DDDDDD;
     --color-gray: #6d71a5;
@@ -143,7 +143,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 .hero__contacts {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
     align-items: flex-end;
 }
 
@@ -170,15 +170,10 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     filter: brightness(0) invert(1);
 }
 
-.hero__contact-item:hover .hero__contact-icon {
-    opacity: 1;
-    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
-}
-
 .hero__info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 20px;
     align-items: flex-end;
     width: 100%;
     margin-bottom: 0;
@@ -188,7 +183,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 
 .hero__age, .hero__city {
     font-size: 1rem;
-    color: #fa8658;
+    color: var(--color-white);
     text-align: right;
     width: 100%;
 }
@@ -215,7 +210,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     display: grid;
     grid-template-columns: 1fr 320px;
     gap: 80px;
-    padding: 60px 0;
+    padding: 60px 0 20px 0;
 }
 
 .section {
@@ -248,7 +243,8 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 
 /* ---------- ОПЫТ РАБОТЫ ---------- */
 .job {
-    margin-bottom: 48px;
+    margin-top: 32px;
+    margin-bottom: 24px;
 }
 
 .job:last-child {
@@ -256,22 +252,43 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 }
 
 .job__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
     margin-bottom: 12px;
+    width: 100%;
 }
 
 .job__company {
-    font-size: 1.4rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 400;
     color: var(--color-black);
-    margin-bottom: 4px;
+    margin: 0;
 }
 
 .job__period {
-    color: var(--color-accent);
+    color: var(--color-gray);
     font-size: 0.9rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    text-align: right;
+    white-space: nowrap; /* Чтобы не переносилось */
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 600px) {
+    .job__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .job__period {
+        text-align: left;
+        white-space: normal;
+    }
 }
 
 .job__achievements {
@@ -280,11 +297,11 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 }
 
 .job__achievements li {
-    margin-bottom: 12px;
-    color: var(--color-dark-gray);
+    margin-bottom: 16px;
+    color: var(--color-black);
     font-size: 1rem;
     line-height: 1.6;
-    border-left: 2px solid #ACCDFF;
+    border-left: 2px solid #e1ecfd;
     padding-left: 16px;
     opacity: 0;
     transform: translateX(-20px);
@@ -388,7 +405,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    margin: 0 0 20px 0;
+    margin: 20px 0 20px 0;
 }
 
 .portfolio-item {
@@ -423,7 +440,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 .portfolio-caption {
     font-size: 0.7rem;
     color: var(--color-dark-gray);
-    margin-top: 4px;
+    margin-top: 20px;
     line-height: 1.3;
     font-weight: 400;
 }
@@ -438,16 +455,23 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 }
 
 .portfolio-item-featured .portfolio-caption-title {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: var(--color-black);
-    margin-bottom: 4px;
-    margin-top: 12px;
 }
 
 .portfolio-item-featured .portfolio-caption-sub {
-    font-size: 0.8rem;
-    color: var(--color-medium-gray);
+    font-size: 1rem;
+    color: var(--color-black);
+    display: block;
+    white-space: normal; /* Разрешаем перенос */
+    word-wrap: break-word; /* Переносим длинные слова */
+    line-height: 1.4; /* Немного увеличиваем межстрочный интервал */
+    max-width: 100%; /* Чтобы не вылезало за края */
+    margin-top: 4px;
+    margin-bottom: 20px;
+    max-width: 600px; /* Фиксированная максимальная ширина */
+    width: 100%; /* Адаптивно до 280px */
 }
 
 .portfolio-item-featured:hover {
@@ -457,7 +481,6 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 /* ---------- ПОРТФОЛИО FULLWIDTH ---------- */
 
 .portfolio-fullwidth {
-    margin: 80px 0 0 0;
     padding: 60px 0 0 0;
     width: 100%;
     position: relative;
@@ -467,12 +490,12 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 
 .portfolio-fullwidth .section__title {
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--color-accent);
     border-bottom: none;
     text-transform: none;
     letter-spacing: normal;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .portfolio-fullwidth-subtitle {
@@ -484,7 +507,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 .portfolio-fullwidth-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 10px;
 }
 
 .portfolio-fullwidth-item {
@@ -505,7 +528,6 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     overflow: hidden;
     background-color: var(--color-light-gray);
     border: 1px solid var(--color-border);
-    border-radius: 4px;
 }
 
 .portfolio-fullwidth-image {
@@ -856,3 +878,65 @@ a, button, .hero-contact-item, .portfolio-item,
     max-width: 1280px;
     margin: 0 auto;
 }
+
+/* Теги инструментов - минимализм */
+.portfolio-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.tool-tag {
+    display: inline-block;
+    padding: 0;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--color-light-gray);
+    background: none;
+    border: none;
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
+/* Разделитель между тегами - опционально */
+.tool-tag:not(:last-child)::after {
+    margin-right: 2px;
+}
+
+/* Для больших плиток */
+.portfolio-item-featured .tool-tag {
+    font-size: 0.75rem;
+}
+
+.hero__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    flex-direction: row;
+    position: relative;
+}
+
+.hero__contact-item::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-white);
+    transition: width 0.3s ease;
+}
+
+.hero__contact-item:hover::after {
+    width: 100%;
+}
+
+.hero__contact-item:hover {
+    color: var(--color-white);
+}
+
