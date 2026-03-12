@@ -278,20 +278,6 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     white-space: nowrap; /* Чтобы не переносилось */
 }
 
-/* Адаптация для мобильных */
-@media (max-width: 600px) {
-    .job__header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-    
-    .job__period {
-        text-align: left;
-        white-space: normal;
-    }
-}
-
 .job__achievements {
     list-style: none;
     margin-top: 16px;
@@ -627,6 +613,7 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
 }
 
 .footer-new__contact {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -634,22 +621,35 @@ h1, h2, h3, h4, h5, h6, .section__title, .job__company {
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease;
-}
-
-.footer-new__contact:hover {
-    color: var(--color-accent);
+    padding-bottom: 2px;
 }
 
 .footer-new__contact-icon {
-    width: 20px;
-    height: 20px;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+    filter: brightness(0) saturate(100%) invert(21%) sepia(12%) saturate(2727%) hue-rotate(201deg) brightness(94%) contrast(86%);
+}
+
+.footer-new__contact::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #546DF6;
+    transition: width 0.3s ease;
+}
+
+.footer-new__contact:hover::after {
+    width: 100%;
+}
+
+.footer-new__contact:hover {
+    color: #546DF6;
 }
 
 .footer-new__contact:hover .footer-new__contact-icon {
     opacity: 1;
-    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3101%) hue-rotate(212deg) brightness(98%) contrast(108%);
+    filter: brightness(0) saturate(100%) invert(37%) sepia(27%) saturate(3655%) hue-rotate(206deg) brightness(97%) contrast(91%);
 }
 
 .footer-cat {
@@ -736,140 +736,6 @@ a, button, .hero-contact-item, .portfolio-item,
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* ---------- АДАПТАЦИЯ ---------- */
-
-@media (max-width: 1200px) {
-    .hero__surname,
-    .hero__firstname {
-        font-size: 4rem;
-    }
-}
-
-@media (max-width: 900px) {
-    .container {
-        padding: 0 24px;
-    }
-
-    .hero__grid {
-        grid-template-columns: 1fr;
-        height: auto;
-        gap: 40px;
-    }
-    
-    .hero__left,
-    .hero__right {
-        height: auto;
-        gap: 40px;
-    }
-    
-    .hero__right {
-        align-items: flex-start;
-    }
-    
-    .hero__contacts {
-        align-items: flex-start;
-    }
-    
-    .hero__info {
-        align-items: flex-start;
-    }
-    
-    .hero__age,
-    .hero__city {
-        text-align: left;
-    }
-    
-    .hero__surname,
-    .hero__firstname {
-        font-size: 3rem;
-        white-space: normal;
-    }
-
-    .main-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .sidebar {
-        border-left: none;
-        padding-left: 0;
-        border-top: 1px solid var(--color-border);
-        padding-top: 40px;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-    }
-    
-    .portfolio-item-featured {
-        grid-column: span 2;
-    }
-
-    .footer-new__content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .footer-new__title {
-        font-size: 2.5rem;
-    }
-    
-    .footer-cat {
-        height: 250px;
-    }
-}
-
-@media (max-width: 768px) {
-    .portfolio-fullwidth-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-}
-
-@media (max-width: 600px) {
-    .hero__surname,
-    .hero__firstname {
-        font-size: 2.2rem;
-    }
-    
-    .hero__photo-img {
-        width: 120px;
-        height: 120px;
-    }
-
-    .job__meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-    
-    .portfolio-item-featured {
-        grid-column: span 1;
-    }
-    
-    .portfolio-item-featured .portfolio-image-wrapper {
-        aspect-ratio: 1 / 1;
-    }
-
-    .footer-new {
-        padding: 40px 0;
-    }
-    
-    .footer-new__title {
-        font-size: 2rem;
-    }
-    
-    .footer-cat {
-        height: 200px;
-    }
 }
 
 /* Полноширинная секция */
@@ -981,17 +847,401 @@ a, button, .hero-contact-item, .portfolio-item,
     transform: scale(1.02); /* Увеличение на 2% как у витрины постов */
 }
 
-/* Для мобильных - чуть меньше */
-@media (max-width: 600px) {
-    .portfolio-fullwidth-item:hover {
-        transform: scale(1.01);
-    }
-}
-
 .jetstyle_works .portfolio-grid {
     margin-bottom: 0;
 }
 
 .jetstyle_works  {
     margin-bottom: 80px;
+}
+
+/* ==================== */
+/* АДАПТИВНОСТЬ */
+/* ==================== */
+
+/* Планшеты и небольшие ноутбуки */
+@media (max-width: 1200px) {
+    .hero__surname,
+    .hero__firstname {
+        font-size: 4rem;
+    }
+    
+    .portfolio-item-featured .portfolio-caption-sub {
+        max-width: 500px;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 900px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero__grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 40px;
+    }
+    
+    .hero__left,
+    .hero__right {
+        height: auto;
+        gap: 40px;
+    }
+    
+    .hero__right {
+        align-items: flex-start;
+    }
+    
+    .hero__contacts {
+        align-items: flex-start;
+    }
+    
+    .hero__info {
+        align-items: flex-start;
+    }
+    
+    .hero__age,
+    .hero__city {
+        text-align: left;
+    }
+    
+    .hero__surname,
+    .hero__firstname {
+        font-size: 3rem;
+        white-space: normal;
+    }
+
+    /* Основной контент */
+    .main-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .sidebar {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    /* Портфолио */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+    
+    .portfolio-item-featured {
+        grid-column: span 2;
+    }
+
+    .portfolio-item-featured .portfolio-caption-sub {
+        max-width: 100%;
+    }
+
+    /* Футер */
+    .footer-new__left {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .footer-new__content {
+        grid-template-columns: 1fr;
+        gap: 120px;
+    }
+    
+    .footer-new__title {
+        font-size: 2.5rem;
+    }
+
+    .footer-new__contacts {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer-cat {
+        height: 250px;
+    }
+
+    .main-grid {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        order: -1; /* Навыки и образование поднимаем вверх */
+    }
+    
+    .main-content .about-section {
+        order: -2; /* Обо мне ещё выше */
+    }
+}
+
+/* Мобильные (большие) */
+@media (max-width: 768px) {
+    .portfolio-fullwidth-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .job__achievements li {
+        border-left: none !important;
+        padding-left: 0 !important;
+    }
+
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .hero__grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 90vh;
+        justify-content: space-between;
+        gap: 0;
+    }
+    
+    /* Левая колонка - всё вверху */
+    .hero__left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+        flex: 0 0 auto;
+        margin-top: 20px;
+    }
+    
+    .hero__photo-wrapper {
+        align-self: center;
+        margin: 0 auto;
+    }
+    
+    .hero__photo-img {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    
+    .hero__name-wrapper {
+        align-self: center;
+        width: 100%;
+    }
+    
+    .hero__name {
+        text-align: center;
+    }
+    
+    .hero__surname,
+    .hero__firstname {
+        text-align: center;
+        white-space: normal;
+        font-size: 4rem !important;
+    }
+    
+    /* Возраст и город в одной строке под именем (в левой колонке) */
+    .hero__left .hero__info {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        transform: none;
+        margin-top: 5px;
+        width: 100%;
+    }
+    
+    .hero__left .hero__age, 
+    .hero__left .hero__city {
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--color-white);
+    }
+    
+    /* Разделитель между ними */
+    .hero__left .hero__city::before {
+        content: '•';
+        margin-right: 15px;
+        color: var(--color-accent);
+        display: inline-block;
+    }
+    
+    /* Правая колонка - только контакты внизу */
+    .hero__right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 15px;
+        position: static;
+        flex: 1;
+        justify-content: flex-end;
+        padding-bottom: 40px;
+    }
+    
+    .hero__right .hero__contacts {
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .hero__right .hero__contact-item {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    /* Скрываем info в правой колонке */
+    .hero__right .hero__info {
+        display: none;
+    }
+    
+    /* Прячем стрелку */
+    .hero__right .scroll-arrow {
+        display: none;
+    }
+}
+
+/* Мобильные (маленькие) */
+@media (max-width: 600px) {
+    .hero__surname,
+    .hero__firstname {
+        font-size: 2.2rem;
+    }
+    
+    .hero__photo-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero__contacts {
+        gap: 15px;
+    }
+
+    .hero__info {
+        gap: 15px;
+        transform: translateY(-8px);
+    }
+
+    /* Job header */
+    .job__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .job__period {
+        text-align: left;
+        white-space: normal;
+    }
+
+    .job__company {
+        font-size: 1.5rem;
+    }
+
+    /* Portfolio grids */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+        margin-bottom: 60px;
+    }
+    
+    .portfolio-item-featured {
+        grid-column: span 2 !important;
+    }
+
+    /* Убедимся, что обычные плитки не растягиваются */
+    .portfolio-item:not(.portfolio-item-featured) {
+        grid-column: span 1 !important;
+    }
+    
+    .portfolio-item-featured .portfolio-image-wrapper {
+        aspect-ratio: 16 / 9;
+    }
+
+    .portfolio-item-featured .portfolio-caption-sub {
+        font-size: 0.9rem;
+    }
+
+    .portfolio-fullwidth-item:hover {
+        transform: scale(1.01);
+    }
+
+    .portfolio-fullwidth-caption {
+        margin-bottom: 20px;
+    }
+
+    /* Footer */
+    .footer-new {
+        padding: 40px 0;
+    }
+    
+    .footer-new__title {
+        font-size: 3rem;
+        letter-spacing: 1px;
+    }
+    
+    .footer-cat {
+        height: 200px;
+    }
+}
+
+/* Очень маленькие мобильные */
+@media (max-width: 480px) {
+    .hero__surname,
+    .hero__firstname {
+        font-size: 1.8rem;
+    }
+    
+    .hero__photo-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero__contact-item {
+        font-size: 1rem;
+    }
+
+    .main-grid {
+        gap: 0;
+    }
+
+    .section {
+        margin: 40px 0 40px 0 !important;
+    }
+
+    .section__title {
+        font-size: 1.5rem;
+    }
+
+    .experience .section__title {
+        font-size: 1.8rem;
+    }
+
+    .portfolio-fullwidth .section__title {
+        font-size: 1.8rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+        margin-bottom: 60px;
+    }
+    
+    .portfolio-item-featured {
+        grid-column: span 2 !important;
+    }
+
+    /* Убедимся, что обычные плитки не растягиваются */
+    .portfolio-item:not(.portfolio-item-featured) {
+        grid-column: span 1 !important;
+    }
+    
+    .portfolio-item-featured .portfolio-image-wrapper {
+        aspect-ratio: 16 / 9;
+    }
+    
 }
